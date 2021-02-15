@@ -5,7 +5,7 @@ logo: /hcz-jekyll-blog/static/img/avatar.png
 github: https://github.com/hyeonsoft
 about: student
 
-baseurl: "https://hyeonsoft.github.io"
+baseurl: "/hyeonsoft"
 url: "https://hyeonsoft.github.io"
 
 allowsearch: true
