@@ -1,16 +1,28 @@
-name: 2147483647
-url: https://hyeonsoft.github.io/
-description: Nothing here
+title: 2147483647 blog
+description: 2147483647 blog
+author: Hyeonsoft
+logo: /hcz-jekyll-blog/static/img/avatar.png
+github: https://github.com/hyeonsoft
+about: student
 
-permalink: /themes/:title/
+baseurl: "https://hyeonsoft.github.io"
+url: "https://hyeonsoft.github.io"
 
-plugins: [jekyll-paginate]
+allowsearch: true
 
-highlighter: pygments
+disqus_shortname: aboutashu
+google_analytics: null
+
+share:
+  twitter_username: \#
+  fb_appid: 000000000000
+
+
+enableTags: true
+tagarray: []
+
 paginate: 20
-
-markdown: rdiscount
-rdiscount:
-    extensions: ['smart']
-
-exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile', 'vendor']
+per_page: 20
+paginate_path: "/page:num/"
+markdown: kramdown
+gems: [jekyll-paginate, jekyll-gist]

@@ -1,68 +1,62 @@
 ---
 layout: default
-title: Jekyll Themes
+title: Blog
 ---
+<div class="well">
+    <div class="list-group">
+      {% for post in paginator.posts %}
+      <div class="list-group-item">
+        <div class="row-action-primary">
+          <i class="fa fa-sticky-note"></i>
+        </div>
+        <div class="row-content">
+          <div class="least-content">{{ post.date | date_to_string }}</div>
+          <h4 class="list-group-item-heading"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h4>
 
-<div class="row-fluid">
-  <div class="col-lg-12 text-center">
-    <div class="form-group">
-      <form action="/search/" method="get">
-        <input type="text" id="search_box" placeholder="Search..." name="query" class="form-control" style="width:100%">
-      </form>
+          <p class="list-group-item-text">{{ post.content | strip_html | truncatewords: 20 }}</p>
+        </div>
+      </div>
+      <div class="list-group-separator"></div>
+      {% endfor %}
     </div>
-  </div>
-</div>
+   
 
-<div class="gallery">
-  {% for post in paginator.posts %}
-  <div class="item">
-    <a class="item-inner" href="{{ post.url }}">
-      <div class="item-image"><img src="/thumbnails/{{ post.thumbnail }}"></div>
-      <div class="item-name">{{ post.title }}</div>
-    </a>
-  </div>
-  {% endfor %}
-</div>
+    <!-- Pagination links -->
+    {% if paginator.total_pages > 1 %}
+    <ul class="pager">
+      {% if paginator.previous_page %}
+        <li class="previous">
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a>
+        </li>
+      {% else %}
+        <li class="previous disabled"><span aria-hidden="true">&laquo;</span></li>
+      {% endif %}
 
-<!-- Pager -->
+      <li><a href="/">First</a></li>
 
-<div class="row-fluid">
-  <div class="span12">
-    <div class="pagination">
-      <ul>
-        {% if paginator.previous_page %}
-
-          {% if paginator.previous_page == 1 %}
-            <li><a href="/">Prev</a></li>
-          {% else %}
-            <li><a href="/page{{ paginator.previous_page }}">Prev</a></li>
-          {% endif %}
-
+      {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+          <li class="active">
+             <a>{{ page }}<span class="sr-only">(current)</span></a>
+          </li>
+        {% elsif page == 1 %}
+          <li><a href="/">{{ page }}</a></li>
         {% else %}
-          <li><span class="disabled">Prev</span></li>
+          <li>
+            <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+          </li>
         {% endif %}
+      {% endfor %}
 
-        {% if paginator.page == 1 %}
-          <li><span class="active">1</span></li>
-        {% else %}
-          <li><a href="/">1</a></li>
-        {% endif %}
+      <li><a href="/page{{ paginator.total_pages }}/">Last</a></li>
 
-        {% for count in (2..paginator.total_pages) %}
-
-          {% if count == paginator.page %}
-            <li><span class="active">{{ count }}</span></li>
-          {% else %}
-            <li><a href="/page{{ count }}">{{ count }}</a></li>
-          {% endif %}
-        {% endfor %}
-
-        {% if paginator.next_page %}
-          <li><a href="/page{{ paginator.next_page }}">Next</a></li>
-        {% else %}
-          <li><span class="disabled">Next</span></li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
-</div>
+      {% if paginator.next_page %}
+        <li class="next">
+          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a>
+        </li>
+      {% else %}
+        <li class="next disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+</div><!-- end #home -->
